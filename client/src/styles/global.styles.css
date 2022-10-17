@@ -1,0 +1,48 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.flex {
+    display: flexM
+}
+
+.f-col {
+    flex-direction: column;
+}
+
+.f-row {
+    flex-direction: row;
+}
+
+.f-align-center {
+    align-items: center;
+}
+
+.f-align-start {
+    align-items: flex-start;
+}
+
+.f-just-even {
+    justify-content: space-evenly;
+}
+
+.f-just-center {
+    justify-content: center;
+}
+
+.f-just-around {
+    justify-content: space-around;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.w-75 {
+    width: 75%;
+}
+
+.w-50 {
+    width: 50%;
+}
