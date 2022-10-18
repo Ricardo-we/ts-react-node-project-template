@@ -1,4 +1,5 @@
 import { BASE_APP_PATH } from "../route.utils";
+import { SyncOptions } from "sequelize";
 import path from "path";
 
 export function getAppModels(appNameList: string[], basePath = BASE_APP_PATH) {
@@ -11,8 +12,8 @@ export function getAppModels(appNameList: string[], basePath = BASE_APP_PATH) {
     ))
 }
 
-export function syncModelList(models: Array<any>) {
+export function syncModelList(models: Array<any>, syncOptions?: SyncOptions) {
     return Promise.all(models.map( appModels => {
-        return Promise.all(appModels?.map((model: any) => model?.sync()));
+        return Promise.all(appModels?.map((model: any) => model?.sync(syncOptions)));
     }))
 }
