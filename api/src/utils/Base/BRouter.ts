@@ -1,6 +1,9 @@
+import { NextFunction, Router } from "express";
+
 import BController from "./BController";
-import { Router } from "express";
 import { joinRoutes } from "../route.utils";
+
+const defaultMiddleware = (_: any, __: any, next: NextFunction) => next();
 
 export default class BRouter {
 
@@ -10,28 +13,33 @@ export default class BRouter {
         const middlewares = controller.controllerConfig.routesMiddlewares;
 
         router.get(
-            joinRoutes(basePath, controllerConfig?.get), 
-            middlewares.get, 
+            controllerConfig?.get ? joinRoutes(basePath, controllerConfig?.get) : basePath,
+            controller?.controllerConfig?.globalMiddleware || defaultMiddleware,
+            middlewares?.get || defaultMiddleware,
             controller.get
         );
         router.get(
-            joinRoutes(basePath, controllerConfig?.getOne), 
-            middlewares.getOne, 
+            controllerConfig?.getOne ? joinRoutes(basePath, controllerConfig?.getOne) : basePath,
+            controller?.controllerConfig?.globalMiddleware || defaultMiddleware,
+            middlewares?.getOne || defaultMiddleware,
             controller.getOne
         );
         router.post(
-            joinRoutes(basePath, controllerConfig?.post), 
-            middlewares.post, 
+            controllerConfig?.post ? joinRoutes(basePath, controllerConfig?.post) : basePath,
+            controller?.controllerConfig?.globalMiddleware || defaultMiddleware,
+            middlewares?.post || defaultMiddleware,
             controller.post
         );
         router.put(
-            joinRoutes(basePath, controllerConfig?.put), 
-            middlewares.put, 
+            controllerConfig?.put ? joinRoutes(basePath, controllerConfig?.put) : basePath,
+            controller?.controllerConfig?.globalMiddleware || defaultMiddleware,
+            middlewares?.put || defaultMiddleware,
             controller.put
         );
         router.delete(
-            joinRoutes(basePath, controllerConfig?.destroy), 
-            middlewares.destroy, 
+            controllerConfig?.destroy ? joinRoutes(basePath, controllerConfig?.destroy) : basePath,
+            controller?.controllerConfig?.globalMiddleware || defaultMiddleware,
+            middlewares?.destroy || defaultMiddleware,
             controller.destroy
         );
 
