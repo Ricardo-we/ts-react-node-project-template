@@ -7,4 +7,4 @@ export function encryptWord(plainText: string){
 
 export function comparePlainToEncrypted(plainText: string, hashedText: string){
     return bcrypt.compareSync(plainText, hashedText); 
-}
+}   
