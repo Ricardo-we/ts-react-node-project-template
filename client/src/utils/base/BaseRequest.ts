@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 
+import User from "../../types/User";
 import settings from "../../app-settings";
 
 export interface RequestConfig extends AxiosRequestConfig {
@@ -20,8 +21,14 @@ export default class BaseRequest {
 		this.endpointUrl = `${this.baseUrl}/${endpointName}`;
 	}
 
-	public async handleErrorResponse(error: unknown) {
-		return {};
+	public createHeaders(token: string){
+		return {
+			"Authorization": "Bearer " + token
+		}
+	}
+
+	public handleErrorResponse(error: any) {
+		return new Error(error?.response?.data?.message,{cause: error?.response?.data?.error});
 	}
 
 	public async find({ routeParams = "", ...requestConfig }: RequestConfig) {
@@ -30,7 +37,7 @@ export default class BaseRequest {
 			const response = await axios.get(fullUrl, requestConfig);
 			return response.data;
 		} catch (error) {
-			return this.handleErrorResponse(error);
+			throw this.handleErrorResponse(error);
 		}
 	}
 
@@ -43,7 +50,7 @@ export default class BaseRequest {
 			const response = await axios.post(fullUrl, payload, requestConfig);
 			return response.data;
 		} catch (error) {
-			return this.handleErrorResponse(error);
+			throw this.handleErrorResponse(error);
 		}
 	}
 
@@ -56,7 +63,7 @@ export default class BaseRequest {
 			const response = await axios.delete(fullUrl, requestConfig);
 			return response.data;
 		} catch (error) {
-			return this.handleErrorResponse(error);
+			throw this.handleErrorResponse(error);
 		}
 	}
 
@@ -66,10 +73,10 @@ export default class BaseRequest {
 	) {
 		try {
 			const fullUrl = this.endpointUrl + routeParams;
-			const response = await axios.post(fullUrl, payload, requestConfig);
+			const response = await axios.put(fullUrl, payload, requestConfig);
 			return response.data;
 		} catch (error) {
-			return this.handleErrorResponse(error);
+			throw this.handleErrorResponse(error);
 		}
 	}
 }

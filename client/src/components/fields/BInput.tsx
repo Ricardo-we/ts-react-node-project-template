@@ -1,16 +1,18 @@
-import { BaseTextFieldProps, FormHelperText, TextField } from "@mui/material";
 import { CSSProperties, FC } from "react";
-import { Field, FieldProps } from "formik";
-
-import { Input } from "@mui/material";
+import { InputProps, StandardTextFieldProps, TextField } from "@mui/material";
 
 interface BInputProps {
 	error?: string;
-	name: string;
-	value: any;
+	name?: string;
+	value?: any;
 	variant?: "filled" | "standard" | "outlined";
-	onChange: (data: any) => any;
+	onChange?: (data: any) => any;
 	style?: CSSProperties;
+	type?: string;
+	label: string;
+	rows?: number;
+	multiline?: boolean;
+	maxRows?: number;
 }
 
 const BInput: FC<BInputProps> = ({
@@ -31,6 +33,11 @@ const BInput: FC<BInputProps> = ({
 			name={name}
 			onChange={onChange}
 			value={value}
+			style={{...props.style, marginBlock: 20, minWidth: 120, maxWidth: 200}}
+			InputLabelProps={{
+				shrink: props.type === "date" || props.type === "datetime" || props.type === "time" ? true : undefined ,
+			}}
+			
 			{...props}
 		/>
 	);

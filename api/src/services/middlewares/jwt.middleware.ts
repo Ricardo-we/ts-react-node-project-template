@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 
 import appConfig from "../../config";
+import { errorResponse } from "../../utils/controller.utils";
 import jwt from "jsonwebtoken";
 
 export function generateJWT(payload: object){

@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc --project tsconfig.json",
     "dev": "npx ts-node-dev index.ts",
-    "create-app": "ts-node --project ./tsconfig.json src/utils/Commands/index createapp"
+    "create-app": "ts-node --project ./tsconfig.json src/utils/Commands/index createapp",
+    "sync-models": "ts-node ./src/utils/Commands/scripts/sync-all-models.ts"
   },
   "author": "",
   "license": "ISC",

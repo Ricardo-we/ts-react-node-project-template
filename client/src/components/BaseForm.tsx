@@ -22,6 +22,7 @@ interface BaseFormProps {
 	isSubmitting?: boolean;
 	style?: CSSProperties;
     className?: string;
+	hideButton?: boolean;
 }
 
 const BaseForm: FC<BaseFormProps> = ({
@@ -32,27 +33,21 @@ const BaseForm: FC<BaseFormProps> = ({
 	isSubmitting,
 	style,
     className,
+	hideButton=false,
 	...props
 }) => {
 	return (
 		<form style={style} className={className} onSubmit={onSubmit}>
 			{children}
 
-			<Box
-				style={{
-					display: "flex",
-					alignItems: "center",
-					justifyContent: "center",
-				}}
-			>
-				{isSubmitting ? (
+		
+				{!hideButton && (isSubmitting ? (
 					<CircularProgress color={spinnerColor} />
 				) : (
 					<Button type="submit" style={{ width: "100%" }}>
 						{props?.buttonText}
 					</Button>
-				)}
-			</Box>
+				))}
 		</form>
 	);
 };
