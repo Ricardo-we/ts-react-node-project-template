@@ -8,11 +8,13 @@ import cliSpinner from "cli-spinners";
 import createControllerTemplate from "./appTemplate/controller.template";
 import createModelTemplate from "./appTemplate/model.template";
 import createRouterTemplate from "./appTemplate/router.template";
+import { existsSync } from "fs";
 import ora from "ora";
 import path from "path";
 
 function createApp(appName: string) {
     const appRootDir = path.join(appConfig.APP_ROOT, "app");
+    if(!existsSync(appRootDir)) mkdirSyncSafe(appRootDir);
     const newAppDir = path.join(appRootDir, appName)
     const controllerTemplate = createControllerTemplate(dashedToPascalCase(appName));
     const modelTemplate = createModelTemplate(appName, dashedToPascalCase(appName));

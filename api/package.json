@@ -8,7 +8,8 @@
     "tsc": "tsc --project tsconfig.json",
     "dev": "npx ts-node-dev index.ts",
     "create-app": "ts-node --project ./tsconfig.json src/utils/Commands/index createapp",
-    "sync-models": "ts-node ./src/utils/Commands/scripts/sync-all-models.ts"
+    "sync-models": "ts-node ./src/utils/Commands/scripts/sync-all-models.ts",
+    "bulk-data": "ts-node ./src/utils/Commands/scripts/bulk-data.ts"
   },
   "author": "",
   "license": "ISC",
